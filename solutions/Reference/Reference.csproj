@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <AssemblyName>NMFSolution</AssemblyName>
+    <RootNamespace>TTC2021.LabWorkflows</RootNamespace>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|AnyCPU'">
+    <OutputPath>bin\</OutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="jobCollection.nmeta" />
+    <None Remove="laboratoryAutomation.nmeta" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="jobCollection.nmeta" />
+    <EmbeddedResource Include="laboratoryAutomation.nmeta" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="CommandLineParser" Version="2.8.0" />
+    <PackageReference Include="NMF-Basics" Version="2.0.176" />
+    <PackageReference Include="NMF-Expressions-Chunk" Version="2.0.176" />
+    <PackageReference Include="NMF-Expressions-Utilities" Version="2.0.176" />
+    <PackageReference Include="NMF-Synchronizations" Version="2.0.176" />
+  </ItemGroup>
+
+</Project>

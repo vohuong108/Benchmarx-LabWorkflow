@@ -1,0 +1,47 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<nmeta:Namespace xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Uri="http://www.transformation-tool-contest.eu/ttc21/jobCollection" Prefix="jobs" Name="jobCollection" xmlns:xmi="http://www.omg.org/XMI" xmlns:nmeta="http://nmf.codeplex.com/nmeta/">
+  <Types xsi:type="nmeta:Class" Name="JobCollection">
+    <References IsContainment="True" ReferenceType="nmeta:Class #//Labware" IsOrdered="True" IsUnique="True" UpperBound="-1" Name="labware" />
+    <References IsContainment="True" ReferenceType="nmeta:Class #//Job" IsOrdered="True" IsUnique="True" LowerBound="1" UpperBound="-1" Name="jobs" />
+  </Types>
+  <Types xsi:type="nmeta:Class" BaseTypes="#//Job" Name="LiquidTransferJob">
+    <References ReferenceType="nmeta:Class #//Labware" IsOrdered="True" IsUnique="True" LowerBound="1" Name="target" />
+    <References IsContainment="True" ReferenceType="nmeta:Class #//TipLiquidTransfer" IsOrdered="True" IsUnique="True" LowerBound="1" UpperBound="8" Name="tips" />
+    <References ReferenceType="nmeta:Class #//Labware" IsOrdered="True" IsUnique="True" LowerBound="1" Name="source" />
+  </Types>
+  <Types xsi:type="nmeta:Class" IdentifierScope="Local" Identifier="#//Labware/name" Name="Labware">
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//String" Name="name" />
+  </Types>
+  <Types xsi:type="nmeta:Class" BaseTypes="#//Labware" Name="Trough" />
+  <Types xsi:type="nmeta:Class" BaseTypes="#//Labware" Name="Microplate" />
+  <Types xsi:type="nmeta:Class" BaseTypes="#//Labware" Name="TubeRunner">
+    <Attributes IsOrdered="True" IsUnique="True" UpperBound="16" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//String" Name="barcodes" />
+  </Types>
+  <Types xsi:type="nmeta:Enumeration" Name="JobStatus">
+    <Literals Name="Planned" />
+    <Literals Value="1" Name="Executing" />
+    <Literals Value="2" Name="Succeeded" />
+    <Literals Value="3" Name="Failed" />
+  </Types>
+  <Types xsi:type="nmeta:Class" Name="TipLiquidTransfer">
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//Integer" Name="sourceCavityIndex" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//Double" Name="volume" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//Integer" Name="targetCavityIndex" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:Enumeration #//JobStatus" Name="status" />
+  </Types>
+  <Types xsi:type="nmeta:Class" IsAbstract="True" Name="Job">
+    <References Opposite="#//Job/next" ReferenceType="nmeta:Class #//Job" IsOrdered="True" IsUnique="True" UpperBound="-1" Name="previous" />
+    <References Opposite="#//Job/previous" ReferenceType="nmeta:Class #//Job" IsOrdered="True" IsUnique="True" UpperBound="-1" Name="next" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:Enumeration #//JobStatus" Name="state" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//String" Name="protocolStepName" />
+  </Types>
+  <Types xsi:type="nmeta:Class" BaseTypes="#//Job" Name="WashJob">
+    <References ReferenceType="nmeta:Class #//Microplate" IsOrdered="True" IsUnique="True" LowerBound="1" Name="microplate" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" UpperBound="-1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//Integer" Name="cavities" />
+  </Types>
+  <Types xsi:type="nmeta:Class" BaseTypes="#//Job" Name="IncubateJob">
+    <References ReferenceType="nmeta:Class #//Microplate" IsOrdered="True" IsUnique="True" LowerBound="1" Name="microplate" />
+    <Attributes DefaultValue="293.15" IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//Double" Name="temperature" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//Integer" Name="duration" />
+  </Types>
+</nmeta:Namespace>

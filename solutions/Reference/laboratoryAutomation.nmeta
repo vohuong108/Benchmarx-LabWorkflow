@@ -1,0 +1,43 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<nmeta:Namespace xmi:version="2.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" Uri="http://www.transformation-tool-contest.eu/ttc21/laboratoryAutomation" Prefix="lab" Name="laboratoryAutomation" xmlns:xmi="http://www.omg.org/XMI" xmlns:nmeta="http://nmf.codeplex.com/nmeta/">
+  <Types xsi:type="nmeta:Class" IdentifierScope="Local" Identifier="#//Assay/name" Name="Assay">
+    <References IsContainment="True" ReferenceType="nmeta:Class #//ProtocolStep" IsOrdered="True" IsUnique="True" LowerBound="1" UpperBound="-1" Name="steps" />
+    <References IsContainment="True" ReferenceType="nmeta:Class #//Reagent" IsOrdered="True" IsUnique="True" UpperBound="-1" Name="reagents" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//String" Name="name" />
+  </Types>
+  <Types xsi:type="nmeta:Class" Name="Sample">
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//String" Name="sampleID" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:Enumeration #//SampleState" Name="state" />
+  </Types>
+  <Types xsi:type="nmeta:Class" Name="JobRequest">
+    <References IsContainment="True" ReferenceType="nmeta:Class #//Assay" IsOrdered="True" IsUnique="True" LowerBound="1" Name="assay" />
+    <References IsContainment="True" ReferenceType="nmeta:Class #//Sample" IsOrdered="True" IsUnique="True" LowerBound="1" UpperBound="-1" Name="samples" />
+  </Types>
+  <Types xsi:type="nmeta:Class" IsAbstract="True" Name="ProtocolStep">
+    <References Opposite="#//ProtocolStep/previous" ReferenceType="nmeta:Class #//ProtocolStep" IsOrdered="True" IsUnique="True" Name="next" />
+    <References Opposite="#//ProtocolStep/next" ReferenceType="nmeta:Class #//ProtocolStep" IsOrdered="True" IsUnique="True" Name="previous" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//String" Name="id" />
+  </Types>
+  <Types xsi:type="nmeta:Class" BaseTypes="#//ProtocolStep" Name="AddReagent">
+    <References ReferenceType="nmeta:Class #//Reagent" IsOrdered="True" IsUnique="True" LowerBound="1" Name="reagent" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//Double" Name="volume" />
+  </Types>
+  <Types xsi:type="nmeta:Class" BaseTypes="#//ProtocolStep" Name="DistributeSample">
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//Double" Name="volume" />
+  </Types>
+  <Types xsi:type="nmeta:Class" IdentifierScope="Local" Identifier="#//Reagent/name" Name="Reagent">
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//String" Name="name" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//String" Name="source" />
+  </Types>
+  <Types xsi:type="nmeta:Enumeration" Name="SampleState">
+    <Literals Name="Waiting" />
+    <Literals Value="1" Name="Processing" />
+    <Literals Value="2" Name="Finished" />
+    <Literals Value="3" Name="Error" />
+  </Types>
+  <Types xsi:type="nmeta:Class" BaseTypes="#//ProtocolStep" Name="Incubate">
+    <Attributes DefaultValue="293.15" IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//Double" Name="temperature" />
+    <Attributes IsOrdered="True" IsUnique="True" LowerBound="1" Type="nmeta:PrimitiveType http://nmf.codeplex.com/nmeta/#//Integer" Name="duration" />
+  </Types>
+  <Types xsi:type="nmeta:Class" BaseTypes="#//ProtocolStep" Name="Wash" />
+</nmeta:Namespace>

@@ -1,0 +1,29 @@
+{
+  "Tools": ["NMF", "RTL"],
+  "Scenarios": [
+  {
+    "Name": "scale_assay",
+    "Models": [
+      "1",
+      "2",
+      "4",
+      "8",
+      "16",
+      "32"
+    ]
+  }, {
+    "Name": "scale_sample",
+    "Models": [
+      "1",
+      "2",
+      "4",
+      "8",
+      "16",
+      "32"
+    ]
+  }
+],
+  "Sequences": 1,
+  "Runs": 1,
+  "Timeout": 6000
+}
